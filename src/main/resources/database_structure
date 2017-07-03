@@ -1,0 +1,56 @@
+CREATE DATABASE music_service;
+
+CREATE TABLE users (
+        id SERIAL PRIMARY KEY,
+        name TEXT NOT NULL,
+        login TEXT UNIQUE NOT NULL,
+        password TEXT UNIQUE NOT NULL,
+        email TEXT UNIQUE NOT NULL,
+        create_date Timestamp,
+        role CHARACTER(10) NOT NULL,
+        address INTEGER,
+        FOREIGN KEY (role) references roles(role),
+        FOREIGN KEY (address) references address(id)
+);
+
+
+
+CREATE TABLE music_type (
+        id SERIAL PRIMARY KEY,
+        type CHARACTER(15) NOT NULL
+);
+
+insert into music_type (id, type) values (default, 'classic');
+insert into music_type (id, type) values (default, 'jazz');
+insert into music_type (id, type) values (default, 'funk');
+
+
+
+CREATE TABLE user_music_type (
+       user_id integer NOT NULL,
+       music_type_id integer NOT NULL,
+       PRIMARY KEY (user_id , music_type_id),
+       FOREIGN KEY (user_id) REFERENCES users (id),
+       FOREIGN KEY (music_type_id) REFERENCES music_type (id)
+);
+
+
+
+CREATE TABLE roles (
+        role CHARACTER(10) NOT NULL,
+        PRIMARY KEY (role)
+);
+
+insert into roles (id, role) values (default, 'user');
+insert into roles (id, role) values (default, 'moderator');
+insert into roles (id, role) values (default, 'admin');
+
+
+CREATE TABLE address (
+        id SERIAL PRIMARY KEY,
+        country TEXT NOT NULL,
+        city TEXT NOT NULL,
+        street TEXT NOT NULL,
+        home SMALLINT NOT NULL,
+        apartment SMALLINT NOT NULL
+);
