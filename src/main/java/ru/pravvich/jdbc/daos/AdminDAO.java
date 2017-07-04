@@ -1,4 +1,4 @@
-package ru.pravvich.jdbc;
+package ru.pravvich.jdbc.daos;
 
 import ru.pravvich.jdbc.action.ClientAdder;
 import ru.pravvich.jdbc.action.ClientDeleter;
@@ -9,7 +9,7 @@ import ru.pravvich.model.Client;
 /**
  * Created by pavel on 03.07.17.
  */
-public class AdminDAO extends ModeratorDAO {
+public class AdminDAO extends ModelDAO {
     /**
      * Default constructor.
      *

@@ -1,4 +1,4 @@
-package ru.pravvich.jdbc;
+package ru.pravvich.jdbc.daos;
 
 import ru.pravvich.jdbc.action.ClientGetterAddress;
 import ru.pravvich.jdbc.action.ClientGetterMusicType;
@@ -9,7 +9,7 @@ import ru.pravvich.model.Client;
 /**
  * Created by pavel on 03.07.17.
  */
-public class ModeratorDAO extends UserDAO {
+public class ModeratorDAO extends ModelDAO {
     /**
      * Default constructor.
      *

@@ -36,6 +36,13 @@ CREATE TABLE user_music_type (
 );
 
 
+--Created 6.
+CREATE UNIQUE INDEX "UI_user_id_music_type_id"
+  ON "user_music_type"
+  USING btree
+  ("user_id", "music_type_id");
+
+
 --Created 2.
 CREATE TABLE roles (
         id SERIAL PRIMARY KEY,
