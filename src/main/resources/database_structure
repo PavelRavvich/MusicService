@@ -1,5 +1,6 @@
 CREATE DATABASE music_service;
 
+--Created 4.
 CREATE TABLE users (
         id SERIAL PRIMARY KEY,
         name TEXT NOT NULL,
@@ -7,14 +8,14 @@ CREATE TABLE users (
         password TEXT UNIQUE NOT NULL,
         email TEXT UNIQUE NOT NULL,
         create_date Timestamp,
-        role CHARACTER(10) NOT NULL,
-        address INTEGER,
-        FOREIGN KEY (role) references roles(role),
+        role INTEGER NOT NULL,
+        address INTEGER NOT NULL,
+        FOREIGN KEY (role) references roles(id),
         FOREIGN KEY (address) references address(id)
 );
 
 
-
+--Created 1.
 CREATE TABLE music_type (
         id SERIAL PRIMARY KEY,
         type CHARACTER(15) NOT NULL
@@ -25,27 +26,27 @@ insert into music_type (id, type) values (default, 'jazz');
 insert into music_type (id, type) values (default, 'funk');
 
 
-
+--Created 5.
 CREATE TABLE user_music_type (
        user_id integer NOT NULL,
        music_type_id integer NOT NULL,
        PRIMARY KEY (user_id , music_type_id),
-       FOREIGN KEY (user_id) REFERENCES users (id),
-       FOREIGN KEY (music_type_id) REFERENCES music_type (id)
+       CONSTRAINT  "FK_user_id" FOREIGN KEY ("user_id") REFERENCES users ("id"),
+       CONSTRAINT  "FK_music_type_id" FOREIGN KEY ("music_type_id") REFERENCES music_type ("id")
 );
 
 
-
+--Created 2.
 CREATE TABLE roles (
-        role CHARACTER(10) NOT NULL,
-        PRIMARY KEY (role)
+        id SERIAL PRIMARY KEY,
+        role CHARACTER(10) NOT NULL
 );
 
 insert into roles (id, role) values (default, 'user');
 insert into roles (id, role) values (default, 'moderator');
 insert into roles (id, role) values (default, 'admin');
 
-
+--Created 3.
 CREATE TABLE address (
         id SERIAL PRIMARY KEY,
         country TEXT NOT NULL,
