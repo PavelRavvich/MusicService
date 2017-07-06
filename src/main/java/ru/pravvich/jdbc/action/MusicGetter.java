@@ -3,6 +3,7 @@ package ru.pravvich.jdbc.action;
 import ru.pravvich.jdbc.properties.PropertiesLoader;
 
 import java.sql.Connection;
+import java.util.List;
 
 /**
  * Created by pavel on 03.07.17.
@@ -18,7 +19,7 @@ public class MusicGetter extends Action {
         super(connection, scripts);
     }
 
-    public String[] getMusicByClientId(final int id) {
+    public List<String> getMusicByClientId(final int id) {
         return null;
     }
 }

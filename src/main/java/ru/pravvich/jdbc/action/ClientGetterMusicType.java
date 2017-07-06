@@ -4,6 +4,7 @@ import ru.pravvich.jdbc.properties.PropertiesLoader;
 import ru.pravvich.model.Client;
 
 import java.sql.Connection;
+import java.util.List;
 
 /**
  * Created by pavel on 03.07.17.
@@ -19,7 +20,7 @@ public class ClientGetterMusicType extends Action {
         super(connection, scripts);
     }
 
-    public Client[] getUsersByMusicType(final String musicType) {
+    public List<Client> getClientsByMusicType(final String musicType) {
         return null;
     }
 }

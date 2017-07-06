@@ -1,5 +1,38 @@
 CREATE DATABASE music_service;
 
+--Created 1.
+CREATE TABLE music_type (
+        id SERIAL PRIMARY KEY,
+        type CHARACTER(15) NOT NULL
+);
+
+insert into music_type (id, type) values (default, 'classic');
+insert into music_type (id, type) values (default, 'jazz');
+insert into music_type (id, type) values (default, 'funk');
+
+
+
+--Created 2.
+CREATE TABLE roles (
+        id SERIAL PRIMARY KEY,
+        role CHARACTER(10) NOT NULL
+);
+
+insert into roles (id, role) values (default, 'user');
+insert into roles (id, role) values (default, 'moderator');
+insert into roles (id, role) values (default, 'admin');
+
+
+--Created 3.
+CREATE TABLE address (
+        id SERIAL PRIMARY KEY,
+        country TEXT NOT NULL,
+        city TEXT NOT NULL,
+        CONSTRAINT unique_address UNIQUE (country, city)
+);
+
+
+
 --Created 4.
 CREATE TABLE users (
         id SERIAL PRIMARY KEY,
@@ -13,17 +46,6 @@ CREATE TABLE users (
         FOREIGN KEY (role) references roles(id),
         FOREIGN KEY (address) references address(id)
 );
-
-
---Created 1.
-CREATE TABLE music_type (
-        id SERIAL PRIMARY KEY,
-        type CHARACTER(15) NOT NULL
-);
-
-insert into music_type (id, type) values (default, 'classic');
-insert into music_type (id, type) values (default, 'jazz');
-insert into music_type (id, type) values (default, 'funk');
 
 
 --Created 5.
@@ -43,22 +65,22 @@ CREATE UNIQUE INDEX "UI_user_id_music_type_id"
   ("user_id", "music_type_id");
 
 
---Created 2.
-CREATE TABLE roles (
-        id SERIAL PRIMARY KEY,
-        role CHARACTER(10) NOT NULL
-);
 
-insert into roles (id, role) values (default, 'user');
-insert into roles (id, role) values (default, 'moderator');
-insert into roles (id, role) values (default, 'admin');
 
---Created 3.
-CREATE TABLE address (
-        id SERIAL PRIMARY KEY,
-        country TEXT NOT NULL,
-        city TEXT NOT NULL,
-        street TEXT NOT NULL,
-        home SMALLINT NOT NULL,
-        apartment SMALLINT NOT NULL
-);
+
+--Create new user.
+--1. Add address.
+insert into address(id, country, city) values (default, 'rus', 'spb') returning id;
+
+--2.Add user
+insert into users (id, name, login, password, email, create_date, role, address)
+values (default, 'pavel1', '2', '2', 'I@mail.world2', now()::timestamp, '1', '1');
+
+#Check unique of login.
+SELECT exists (select true FROM users WHERE login = (?));
+
+#Check unique of password.
+SELECT exists (select true FROM users WHERE password = (?));
+
+#Check exist of address.
+address_exist=SELECT exists (select true FROM address WHERE country = 'rus' AND city = 'spb');

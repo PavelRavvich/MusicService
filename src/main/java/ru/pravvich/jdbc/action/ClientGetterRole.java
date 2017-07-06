@@ -4,6 +4,7 @@ import ru.pravvich.jdbc.properties.PropertiesLoader;
 import ru.pravvich.model.Client;
 
 import java.sql.Connection;
+import java.util.List;
 
 /**
  * Created by pavel on 03.07.17.
@@ -20,7 +21,7 @@ public class ClientGetterRole extends Action {
         super(connection, scripts);
     }
 
-    public Client[] getClientsByRole(final String role) {
+    public List<Client> getClientsByRole(final String role) {
         return null;
     }
 }
