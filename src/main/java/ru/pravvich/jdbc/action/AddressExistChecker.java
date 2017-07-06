@@ -43,7 +43,6 @@ public class AddressExistChecker extends Action {
 
             final ResultSet set = statement.executeQuery();
 
-
             if (set.next()) return set.getBoolean(1);
 
         } catch (SQLException e) {
