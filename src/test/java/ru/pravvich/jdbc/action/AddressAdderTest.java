@@ -32,11 +32,11 @@ public class AddressAdderTest {
         final Connection connection = mock(Connection.class);
         when(connection.prepareStatement("mock_script")).thenReturn(statement);
 
-        final AddressAdder checker =
+        final AddressAdder adder =
                 new AddressAdder(connection, properties);
 
         final Address address = new Address("test", "test");
-        final int result = checker.addAddress(address);
+        final int result = adder.addAddress(address);
 
         Assert.assertThat(result, is(1));
 
@@ -60,11 +60,11 @@ public class AddressAdderTest {
                 .thenThrow(mock(SQLException.class));
 
 
-        final AddressAdder checker =
+        final AddressAdder adder =
                 new AddressAdder(connection, properties);
 
         final Address address = new Address("test", "test");
-        final int result = checker.addAddress(address);
+        final int result = adder.addAddress(address);
 
         Assert.assertThat(result, is(-1));
 
@@ -89,11 +89,11 @@ public class AddressAdderTest {
         final Connection connection = mock(Connection.class);
         when(connection.prepareStatement("mock_script")).thenReturn(statement);
 
-        final AddressAdder checker =
+        final AddressAdder adder =
                 new AddressAdder(connection, properties);
 
         final Address address = new Address("test", "test");
-        final int result = checker.addAddress(address);
+        final int result = adder.addAddress(address);
 
         Assert.assertThat(result, is(-1));
 
@@ -121,11 +121,11 @@ public class AddressAdderTest {
         final Connection connection = mock(Connection.class);
         when(connection.prepareStatement("mock_script")).thenReturn(statement);
 
-        final AddressAdder checker =
+        final AddressAdder adder =
                 new AddressAdder(connection, properties);
 
         final Address address = new Address("test", "test");
-        final int result = checker.addAddress(address);
+        final int result = adder.addAddress(address);
 
         Assert.assertThat(result, is(-1));
 
