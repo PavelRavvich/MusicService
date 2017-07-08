@@ -74,7 +74,7 @@ insert into address(id, country, city) values (default, 'rus', 'spb') returning 
 
 --2.Add user
 insert into users (id, name, login, password, email, create_date, role, address)
-values (default, 'pavel1', '2', '2', 'I@mail.world2', now()::timestamp, '1', '1');
+values (default, 'pavel1', '3', '3', 'I@mail.world21', now()::timestamp, '1', '1') returning id;
 
 #Check unique of login.
 SELECT exists (select true FROM users WHERE login = (?));
@@ -84,3 +84,15 @@ SELECT exists (select true FROM users WHERE password = (?));
 
 #Check exist of address.
 address_exist=SELECT exists (select true FROM address WHERE country = 'rus' AND city = 'spb');
+
+#Get music types by user id.
+select m.type from music_type as m
+left join user_music_type as u
+on m.id = u.music_type_id
+WHERE u.user_id = '1';
+
+#Check user exist by login & password.
+SELECT EXISTS (SELECT TRUE FROM users WHERE login = '1' AND password = '1');
+
+#Get role by login & password set.
+SELECT role FROM users WHERE login = (?) AND password = (?) LIMIT 1;
