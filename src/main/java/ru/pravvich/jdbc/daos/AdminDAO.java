@@ -23,9 +23,9 @@ public class AdminDAO extends ModelDAO {
      * Add client to database.
      *
      * @param client for addition.
-     * @return true if addition success, else false.
+     * @return id of added client, if addition fail return flag -1.
      */
-    public boolean addClient(final Client client) {
+    public int addClient(final Client client) {
         return new ClientAdder(connection, properties).addClient(client);
     }
 

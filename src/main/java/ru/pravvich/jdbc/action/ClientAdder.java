@@ -1,7 +1,6 @@
 package ru.pravvich.jdbc.action;
 
 import ru.pravvich.jdbc.properties.PropertiesLoader;
-import ru.pravvich.model.Address;
 import ru.pravvich.model.Client;
 
 import java.sql.Connection;
@@ -10,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * Created by pavel on 03.07.17.
+ * Add Client to table users.
  */
 public class ClientAdder extends Action {
     /**
@@ -25,50 +24,37 @@ public class ClientAdder extends Action {
         super(connection, scripts);
     }
 
-    public boolean addClient(final Client client) {
+    /**
+     * Addition client to database.
+     *
+     * @param client    for addition to users table.
+     * @return id of added client, if addition fail return flag -1.
+     */
+    public int addClient(final Client client) {
 
-        try (PreparedStatement statement = connection
+        try (final PreparedStatement statement =
 
-                .prepareStatement(scripts.get("add_client"))) {
+                     connection.prepareStatement(
+
+                             scripts.get("add_client"))) {
 
 
+            statement.setString(2, client.getName());
+            statement.setString(3, client.getLogin());
+            statement.setString(4, client.getPassword());
+            statement.setString(5, client.getEmail());
+            statement.setInt(7, client.getRoleId());
+            statement.setInt(8, client.getAddress().getId());
 
+
+            final ResultSet set = statement.executeQuery();
+
+            if (set.next()) return set.getInt(1);
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return false;
-    }
-
-    /**
-     * Add address of client.
-     *
-     * @param client which contain address.
-     * @return id of address in "address" table.
-     */
-    private int addAddress(final Client client) throws SQLException {
-
-        int result = 0;
-
-        final Address address = client.getAddress();
-
-        try (PreparedStatement statement = connection
-
-                .prepareStatement(scripts.get("add_address"))) {
-
-
-            statement.setString(1, address.getCountry());
-
-            statement.setString(2, address.getCity());
-
-            final ResultSet set = statement.executeQuery();
-
-            if (set.next()) {
-                result = set.getInt(1);
-            }
-
-            return result;
-        }
+        return -1;
     }
 }

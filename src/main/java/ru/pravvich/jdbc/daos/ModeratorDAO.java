@@ -1,8 +1,6 @@
 package ru.pravvich.jdbc.daos;
 
-import ru.pravvich.jdbc.action.ClientGetterAddress;
-import ru.pravvich.jdbc.action.ClientGetterMusicType;
-import ru.pravvich.jdbc.action.ClientGetterRole;
+import ru.pravvich.jdbc.action.*;
 import ru.pravvich.jdbc.properties.PropertiesLoader;
 import ru.pravvich.model.Address;
 import ru.pravvich.model.Client;
@@ -56,5 +54,27 @@ public class ModeratorDAO extends ModelDAO {
     public List<Client> getClientsByMusicType(final String musicType) {
         return new ClientGetterMusicType(connection, properties)
                 .getClientsByMusicType(musicType);
+    }
+
+    public Client getClientLogPass(final String login, final String password) {
+        return new Client();
+    }
+
+    /**
+     * Get role id by pair login & password.
+     *
+     * @param login of Client.
+     * @param password of Client.
+     * @return id of role. If Client not found return flag 0.
+     * If login or password == null return flag 0;
+     */
+    public int getAccessLogPass(final String login, final String password) {
+        return new RoleIdGetter(connection, properties)
+                .getRoleIdByLogPas(login, password);
+    }
+
+    public boolean clientIsExist(final String login, final String password) {
+        return new ClientExistChecker(connection, properties)
+                .clientIsExist(login, password);
     }
 }

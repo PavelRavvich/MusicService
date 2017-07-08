@@ -24,13 +24,16 @@ public class GenericDAO implements DAO {
 
     private Connection connection;
 
-    public GenericDAO(final PropertiesLoader properties) throws SQLException {
-        this.properties = properties;
-        initConnection();
+    public GenericDAO(final String dbAuth, final String dbScript)
+            throws SQLException {
+
+        properties = new PropertiesLoader(dbScript);
+        initConnection(dbAuth);
     }
 
-    private void initConnection() throws SQLException {
-        connection = new DatabaseConnection(properties).getConnection();
+    private void initConnection(final String dbAuth) throws SQLException {
+        connection = new DatabaseConnection(
+                new PropertiesLoader(dbAuth)).getConnection();
     }
 
     @Override
@@ -79,5 +82,15 @@ public class GenericDAO implements DAO {
         }
 
         return dao;
+    }
+
+    public void closeConnection() {
+        try {
+
+            connection.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
