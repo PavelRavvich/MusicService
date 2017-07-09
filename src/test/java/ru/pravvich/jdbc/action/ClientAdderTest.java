@@ -46,12 +46,12 @@ public class ClientAdderTest {
         verify(properties).get("add_client");
         verify(connection).prepareStatement("mock_script");
 
-        verify(statement).setString(2, client.getName());
-        verify(statement).setString(3, client.getLogin());
-        verify(statement).setString(4, client.getPassword());
-        verify(statement).setString(5, client.getEmail());
-        verify(statement).setInt(7, client.getRoleId());
-        verify(statement).setInt(8, client.getAddress().getId());
+        verify(statement).setString(1, client.getName());
+        verify(statement).setString(2, client.getLogin());
+        verify(statement).setString(3, client.getPassword());
+        verify(statement).setString(4, client.getEmail());
+        verify(statement).setInt(5, client.getRoleId());
+        verify(statement).setInt(6, client.getAddress().getId());
 
         verify(statement).executeQuery();
         verify(set).next();
