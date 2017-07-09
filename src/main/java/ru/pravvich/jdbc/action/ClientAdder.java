@@ -39,12 +39,12 @@ public class ClientAdder extends Action {
                              scripts.get("add_client"))) {
 
 
-            statement.setString(2, client.getName());
-            statement.setString(3, client.getLogin());
-            statement.setString(4, client.getPassword());
-            statement.setString(5, client.getEmail());
-            statement.setInt(7, client.getRoleId());
-            statement.setInt(8, client.getAddress().getId());
+            statement.setString(1, client.getName());
+            statement.setString(2, client.getLogin());
+            statement.setString(3, client.getPassword());
+            statement.setString(4, client.getEmail());
+            statement.setInt(5, client.getRoleId());
+            statement.setInt(6, client.getAddress().getId());
 
 
             final ResultSet set = statement.executeQuery();
