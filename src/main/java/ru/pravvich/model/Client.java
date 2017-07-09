@@ -51,6 +51,21 @@ public class Client {
         this.email = email;
     }
 
+    public Client(String name,
+                  String login,
+                  String password,
+                  Address address,
+                  int roleId,
+                  String email) {
+        this.name = name;
+        this.login = login;
+        this.password = password;
+        this.address = address;
+        this.roleId = roleId;
+        this.email = email;
+        setRoleId(roleId);
+    }
+
     public Client(final String name,
                   final String login,
                   final String password,
