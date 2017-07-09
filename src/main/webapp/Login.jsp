@@ -76,6 +76,6 @@
     <c:out value="${warning}"/>
 
 </div>
-
+<a href="Registration.jsp">Registration</a>
 </body>
 </html>
