@@ -2,6 +2,7 @@ package ru.pravvich.jdbc.daos;
 
 import ru.pravvich.jdbc.action.*;
 import ru.pravvich.jdbc.properties.PropertiesLoader;
+import ru.pravvich.model.Address;
 import ru.pravvich.model.Client;
 
 /**
@@ -29,6 +30,11 @@ public class AdminDAO extends ModelDAO {
         return new ClientAdder(connection, properties).addClient(client);
     }
 
+    public int addAddress(final Address address) {
+        return new AddressAdder(connection, properties).addAddress(address);
+    }
+
+
     /**
      * Update client row in users table.
      *
@@ -53,10 +59,10 @@ public class AdminDAO extends ModelDAO {
      * Check login exist in database.
      *
      * @param login for check.
-     * @return true if exist, else false.
+     * @return true if not exist, else false.
      */
     public boolean loginUnique(final String login) {
-        return new LoginExistChecker(connection, properties)
+        return !new LoginExistChecker(connection, properties)
                 .loginIsExist(login);
     }
 
@@ -64,10 +70,10 @@ public class AdminDAO extends ModelDAO {
      * Check password exist in database.
      *
      * @param password for check.
-     * @return true if exist, else false.
+     * @return true if not exist, else false.
      */
     public boolean passwordUnique(final String password) {
-        return new PasswordExistChecker(connection, properties)
+        return !new PasswordExistChecker(connection, properties)
                 .passwordIsExist(password);
     }
 }
