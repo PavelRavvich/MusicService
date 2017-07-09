@@ -51,4 +51,51 @@
         <servlet-name>EditMusicServlet</servlet-name>
         <url-pattern>/user_menu/edit_music</url-pattern>
     </servlet-mapping>
+
+
+    <!--Moderator Menu-->
+    <servlet>
+        <servlet-name>ModeratorMenu</servlet-name>
+        <servlet-class>ru.pravvich.servlet.ModeratorMenuServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ModeratorMenu</servlet-name>
+        <url-pattern>/moderator_menu</url-pattern>
+    </servlet-mapping>
+
+
+    <!--Admin Menu-->
+    <servlet>
+        <servlet-name>AdminMenu</servlet-name>
+        <servlet-class>ru.pravvich.servlet.AdminMenuServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AdminMenu</servlet-name>
+        <url-pattern>/admin_menu</url-pattern>
+    </servlet-mapping>
+
+
+    <!--AJAX getter for form cities-county-->
+    <servlet>
+        <servlet-name>CountryCityServlet</servlet-name>
+        <servlet-class>ru.pravvich.servlet.CountryCityServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CountryCityServlet</servlet-name>
+        <url-pattern>/citiesByCountry</url-pattern>
+    </servlet-mapping>
+
+    <!--Admin Menu-->
+    <servlet>
+        <servlet-name>RegistrationServlet</servlet-name>
+        <servlet-class>ru.pravvich.servlet.RegistrationServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>RegistrationServlet</servlet-name>
+        <url-pattern>/registration</url-pattern>
+    </servlet-mapping>
 </web-app>
