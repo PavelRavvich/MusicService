@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Created by pavel on 08.07.17.
+ * User Menu. Send client to servlet by select.
  */
 public class UserMenuServlet extends HttpServlet {
     @Override
