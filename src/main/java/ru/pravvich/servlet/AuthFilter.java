@@ -116,20 +116,16 @@ public class AuthFilter implements Filter {
 
         final HttpSession session = req.getSession();
 
-        synchronized (session) {
-            session.setAttribute(login, req.getParameter(login));
-            session.setAttribute("access", access);
-            session.setAttribute("id", id);
-        }
+        session.setAttribute(login, req.getParameter(login));
+        session.setAttribute("access", access);
+        session.setAttribute("id", id);
     }
 
     /**
      * Get access from current session.
      */
     private int getSessionAccess(final HttpSession session) {
-        synchronized (session) {
-            return (int) session.getAttribute(access);
-        }
+        return (int) session.getAttribute(access);
     }
 
     /**
@@ -141,9 +137,7 @@ public class AuthFilter implements Filter {
     private boolean userExistIn(final HttpSession session)
             throws ServletException, IOException {
 
-        synchronized (session) {
-            return (nonNull(session.getAttribute(login)));
-        }
+        return (nonNull(session.getAttribute(login)));
     }
 
     /**
@@ -183,7 +177,7 @@ public class AuthFilter implements Filter {
      * @return access level.
      */
     private int getAccess(final HttpServletRequest request,
-                             final GenericDAO dao) {
+                          final GenericDAO dao) {
 
         final String log = request.getParameter(login);
         final String pas = request.getParameter(password);

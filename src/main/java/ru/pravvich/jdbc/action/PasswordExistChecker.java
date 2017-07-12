@@ -40,9 +40,9 @@ public class PasswordExistChecker extends Action {
 
             statement.setString(1, password);
 
-            final ResultSet set = statement.executeQuery();
-
-            if (set.next()) return set.getBoolean(1);
+            try (final ResultSet set = statement.executeQuery()) {
+                if (set.next()) return set.getBoolean(1);
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();

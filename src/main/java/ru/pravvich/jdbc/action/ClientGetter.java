@@ -39,22 +39,24 @@ public class ClientGetter extends Action {
 
             statement.setInt(1, id);
 
-            final ResultSet set = statement.executeQuery();
 
-            if (set.next()) {
+            try (final ResultSet set = statement.executeQuery()) {
 
-                final Client result = new Client();
+                if (set.next()) {
 
-                result.setId(id);
-                result.setName(set.getString("name"));
-                result.setLogin(set.getString("login"));
-                result.setPassword(set.getString("password"));
-                result.setEmail(set.getString("email"));
-                result.setCreate(set.getTimestamp("create_date"));
-                result.setRoleId(set.getInt("role"));
-                result.setAddress(new Address(set.getInt("address")));
+                    final Client result = new Client();
 
-                return result;
+                    result.setId(id);
+                    result.setName(set.getString("name"));
+                    result.setLogin(set.getString("login"));
+                    result.setPassword(set.getString("password"));
+                    result.setEmail(set.getString("email"));
+                    result.setCreate(set.getTimestamp("create_date"));
+                    result.setRoleId(set.getInt("role"));
+                    result.setAddress(new Address(set.getInt("address")));
+
+                    return result;
+                }
             }
 
         } catch (SQLException e) {

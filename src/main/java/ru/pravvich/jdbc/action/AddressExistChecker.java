@@ -41,9 +41,10 @@ public class AddressExistChecker extends Action {
             statement.setString(1, address.getCountry());
             statement.setString(2, address.getCity());
 
-            final ResultSet set = statement.executeQuery();
+            try (final ResultSet set = statement.executeQuery()) {
+                if (set.next()) return set.getBoolean(1);
+            }
 
-            if (set.next()) return set.getBoolean(1);
 
         } catch (SQLException e) {
             e.printStackTrace();

@@ -47,9 +47,9 @@ public class ClientAdder extends Action {
             statement.setInt(6, client.getAddress().getId());
 
 
-            final ResultSet set = statement.executeQuery();
-
-            if (set.next()) return set.getInt(1);
+            try (final ResultSet set = statement.executeQuery()) {
+                if (set.next()) return set.getInt(1);
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();

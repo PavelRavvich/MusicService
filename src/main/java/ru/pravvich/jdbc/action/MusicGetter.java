@@ -37,13 +37,11 @@ public class MusicGetter extends Action {
 
             statement.setInt(1, id);
 
-            final ResultSet set = statement.executeQuery();
-
-            while (set.next()) {
-                musics.add(set.getString(1));
+            try (final ResultSet set = statement.executeQuery()) {
+                while (set.next()) {
+                    musics.add(set.getString(1));
+                }
             }
-
-            return musics;
 
         } catch (SQLException e) {
             e.printStackTrace();

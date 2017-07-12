@@ -22,7 +22,7 @@ public class RegistrationServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-        dao = (GenericDAO)getServletContext().getAttribute("db");
+        dao = (GenericDAO) getServletContext().getAttribute("db");
     }
 
     @Override
@@ -61,13 +61,13 @@ public class RegistrationServlet extends HttpServlet {
 
     private void addClientSession(Client client, HttpServletRequest req) {
         final HttpSession session = req.getSession();
-        synchronized (session) {
-            session.setAttribute("login", client.getLogin());
-            session.setAttribute("password", client.getPassword());
-            session.setAttribute("id", client.getId());
-            session.setAttribute("access", 1);
 
-        }
+        session.setAttribute("login", client.getLogin());
+        session.setAttribute("password", client.getPassword());
+        session.setAttribute("id", client.getId());
+        session.setAttribute("access", 1);
+
+
     }
 
     private int addClientToDB(Client client) {
@@ -98,7 +98,7 @@ public class RegistrationServlet extends HttpServlet {
         final String password = req.getParameter("password");
         final String country = req.getParameter("country");
         final String city = req.getParameter("city");
-        final String email= req.getParameter("email");
+        final String email = req.getParameter("email");
 
         return new Client(
                 name,

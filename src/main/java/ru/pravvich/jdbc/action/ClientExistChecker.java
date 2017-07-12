@@ -41,9 +41,9 @@ public class ClientExistChecker extends Action {
             statement.setString(1, login);
             statement.setString(2, password);
 
-            final ResultSet set = statement.executeQuery();
-
-            if (set.next()) return set.getBoolean("exists");
+            try (final ResultSet set = statement.executeQuery()){
+                if (set.next()) return set.getBoolean("exists");
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();

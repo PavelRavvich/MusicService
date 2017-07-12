@@ -41,9 +41,9 @@ public class AddressAdder extends Action {
             statement.setString(1, address.getCountry());
             statement.setString(2, address.getCity());
 
-            final ResultSet set = statement.executeQuery();
-
-            if (set.next()) return set.getInt(1);
+            try (final ResultSet set = statement.executeQuery()) {
+                if (set.next()) return set.getInt(1);
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();
